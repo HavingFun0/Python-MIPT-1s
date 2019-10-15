@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://cs.mipt.ru/python/drafts/lab6.html -->
+<html lang="ru" class="gr__cs_mipt_ru"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>Игра "Поймай шарик"</title>
+        <link rel="stylesheet" href="./Игра _Поймай шарик__files/main.css">
+        <link rel="icon" type="image/png" href="http://cs.mipt.ru/python/favicon.png">
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home" data-gr-c-s-loaded="true">
+        <div id="wrap">
+            <header id="banner" class="body">
+                    <img src="./Игра _Поймай шарик__files/logo.png" class="logo">
+                    <nav><ul>
+                        <li><a href="http://cs.mipt.ru/python">Главная</a></li>
+                    </ul></nav>
+            </header><!-- /#banner -->
+            <div id="main" <section="" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="http://cs.mipt.ru/python/drafts/lab6.html" rel="bookmark" title="Permalink to Игра " Поймай="" шарик""="">Игра "Поймай шарик"</a></h1>
+    </header>
+    <div class="contents topic" id="id2">
+<p class="topic-title first">Содержание</p>
+<ul class="simple">
+<li><a class="reference internal" href="http://cs.mipt.ru/python/drafts/lab6.html#git-github" id="id5">Git и Github</a></li>
+<li><a class="reference internal" href="http://cs.mipt.ru/python/drafts/lab6.html#canvas" id="id6">Виджет Canvas</a></li>
+<li><a class="reference internal" href="http://cs.mipt.ru/python/drafts/lab6.html#id3" id="id7">Заготовка игры "Поймай шарик"</a><ul>
+<li><a class="reference internal" href="http://cs.mipt.ru/python/drafts/lab6.html#id4" id="id8">Задания</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="git-github">
+<h2><a class="toc-backref" href="http://cs.mipt.ru/python/drafts/lab6.html#id5">Git и Github</a></h2>
+<p>Что такое Tkinter</p>
+<p>Tkinter – это пакет для Python, предназначенный для работы с библиотекой Tk. Библиотека Tk содержит компоненты графического интерфейса пользователя (graphical user interface – GUI), написанные на языке программирования Tcl.</p>
+<p>Под графическим интерфейсом пользователя (GUI) подразумеваются все те окна, кнопки, текстовые поля для ввода, скроллеры, списки, радиокнопки, флажки и др., которые вы видите на экране, открывая то или иное приложение. Через них вы взаимодействуете с программой и управляете ею. Все эти элементы интерфейса вместе будем называть виджетами (widgets).</p>
+<p>В настоящее время почти все приложения, которые создаются для конечного пользователя, имеют GUI. Редкие программы, подразумевающие взаимодействие с человеком, остаются консольными. В предыдущих двух курсах мы писали только консольные программы.</p>
+<p>Существует множество библиотек GUI. Tk далеко не самая популярная, хотя с ее использованием написано не мало проектов. Однако по ряду причин она была выбрана для Python по-умолчанию. Установочный файл Питона обычно уже включает пакет tkinter в составе стандартной библиотеки наряду с другими модулями.</p>
+<p>Не вдаваясь в подробности, Tkinter можно охарактеризовать как переводчик с языка Python на язык Tcl. Вы пишете программу на Python, а код модуля tkinter у вас за спиной переводит ваши инструкции на язык Tcl, который понимает библиотека Tk.</p>
+<p>Приложения с графическим интерфейсом пользователя событийно-ориентированные. Вы уже должны иметь представление о структурном и желательно объектно-ориентированном программировании. Событийно-ориентированное ориентировано на события. То есть та или иная часть программного кода начинает выполняться лишь тогда, когда случается то или иное событие.</p>
+<p>Событийно-ориентированное программирование базируется на объектно-ориентированном и структурном. Даже если мы не создаем собственных классов и объектов, то все-равно ими пользуемся. Все виджеты – объекты, порожденные встроенными классами.</p>
+<p>События бывают разными. Сработал временной фактор, кто-то кликнул мышкой или нажал Enter, начал вводить текст, переключил радиокнопки, прокрутил страницу вниз и т. д. Когда случается что-то подобное, то, если был создан соответствующий обработчик, происходит срабатывание определенной части программы, что приводит к какому-либо результату.</p>
+<p>Tkinter импортируется стандартно для модуля Python любым из способов: <code>import tkinter</code>, <code>from tkinter import *</code>, <code>import tkinter as tk</code>. Можно импортировать отдельные классы, что делается редко. В данной работе будет в основном использоваться <code>from tkinter import *</code>.</p>
+<p>Далее, чтобы написать GUI-программу, надо выполнить приблизительно следующее:</p>
+<ol class="arabic simple">
+<li>Создать главное окно.</li>
+<li>Создать виджеты и выполнить конфигурацию их свойств (опций).</li>
+<li>Определить события, то есть то, на что будет реагировать программа.</li>
+<li>Определить обработчики событий, то есть то, как будет реагировать программа.</li>
+<li>Расположить виджеты в главном окне.</li>
+<li>Запустить цикл обработки событий.</li>
+</ol>
+<p>Последовательность не обязательно такая, но первый и последний пункты всегда остаются на своих местах. Посмотрим все это в действии.</p>
+<p>В современных операционных системах любое пользовательское приложение заключено в окно, которое можно назвать главным, так как в нем располагаются все остальные виджеты. Объект окна верхнего уровня создается от класса Tk модуля tkinter. Переменную, связываемую с объектом, часто называют root (корень):</p>
+<div class="highlight"><pre><span></span><span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+</pre></div>
+<p>Пусть в окне приложения располагаются текстовое поле (entry), метка (label) и кнопка (button). Данные объекты создаются от соответствующих классов модуля tkinter. Мы сразу сконфигурируем некоторые их свойства с помощью передачи аргументов конструкторам этих классов:</p>
+<div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">"Преобразовать"</span><span class="p">)</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+<p>Устанавливать свойства объектов не обязательно при из создании. Существуют еще пара способов, с помощью которых можно это сделать после.</p>
+<p>Обратите внимание, что первым аргументом указывается "хозяин, мастер" – место, где располагается виджет. В данном случае его можно было не указывать. Однако виджеты не обязательно располагаются на root'е. Они могут размещаться в других виджетах.</p>
+<p>Пусть в программе текст, введенный человеком в поле, при нажатии на кнопку разбивается на список слов, слова сортируются по алфавиту и выводятся в метке. Код выполняющий все это надо поместить в функцию:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">strToSortlist</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">l</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+<p>У функций, которые вызываются при наступлении события с помощью метода bind(), должен быть один параметр. Обычно его называют event (событие).</p>
+<p>В приведенной функции с помощью метода get() из поля забирается текст, представляющий собой строку. Она преобразуется в список слов с помощью метода split(). Потом список сортируется. В конце изменяется свойство text метки. Ему присваивается строка, полученная из списка с помощью строкового метода join().</p>
+<p>Теперь необходимо связать вызов функции с событием:</p>
+<div class="highlight"><pre><span></span><span class="n">b</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">'&lt;Button-1&gt;'</span><span class="p">,</span> <span class="n">strToSortlist</span><span class="p">)</span>
+</pre></div>
+<p>В данном случае это делается с помощью метода bind(). Ему передается событие и вызываемая функция. Событие будет передано в функцию и присвоено параметру event. В данном случае событием является щелчок левой кнопкой мыши, что обозначается строкой '&lt;Button-1&gt;'.</p>
+<p>В любом приложении виджеты не разбросаны по окну как попало, а хорошо организованы, интерфейс продуман до мелочей и обычно подчинен определенным стандартам. Пока расположим элементы друг за другом с помощью наиболее простого менеджера геометрии tkinter – метода pack():</p>
+<div class="highlight"><pre><span></span><span class="n">e</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">b</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+</pre></div>
+<p>Метод mainloop() объекта Tk запускает главный цикл обработки событий, что в том числе приводит к отображению главного окна со всеми его причиндалами на экране:</p>
+<div class="highlight"><pre><span></span><span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+<p>Полный код программы:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+
+<span class="n">e</span> <span class="o">=</span> <span class="n">Entry</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">Button</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="s2">"Преобразовать"</span><span class="p">)</span>
+<span class="n">l</span> <span class="o">=</span> <span class="n">Label</span><span class="p">(</span><span class="n">bg</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">fg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">strToSortlist</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">s</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">l</span><span class="p">[</span><span class="s1">'text'</span><span class="p">]</span> <span class="o">=</span> <span class="s1">' '</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+<span class="n">b</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">'&lt;Button-1&gt;'</span><span class="p">,</span> <span class="n">strToSortlist</span><span class="p">)</span>
+
+<span class="n">e</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">b</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">l</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+<p>В результате выполнения данного скрипта появляется окно, в текстовое поле которого можно ввести список слов, нажать кнопку и получить его отсортированный вариант.</p>
+</div>
+<div class="section" id="canvas">
+<h2><a class="toc-backref" href="http://cs.mipt.ru/python/drafts/lab6.html#id6">Виджет Canvas</a></h2>
+<p>В tkinter от класса Canvas создаются объекты-холсты, на которых можно "рисовать", размещая различные фигуры и объекты. Делается это с помощью вызовов соответствующих методов.</p>
+<p>При создании экземпляра Canvas необходимо указать его ширину и высоту. При размещении геометрических примитивов и других объектов указываются их координаты на холсте. Точкой отсчета является верхний левый угол.</p>
+<p>В программе ниже создается холст. На нем с помощью метода create_line() рисуются отрезки. Сначала указываются координаты начала (x1, y1), затем – конца (x2, y2).</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Canvas</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">create_line</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">create_line</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span>
+                <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">arrow</span><span class="o">=</span><span class="n">LAST</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span>
+                <span class="n">activefill</span><span class="o">=</span><span class="s1">'lightgreen'</span><span class="p">,</span>
+                <span class="n">arrowshape</span><span class="o">=</span><span class="s2">"10 20 10"</span><span class="p">)</span>
+
+<span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+<p>Остальные свойства являются необязательными. Так activefill определяет цвет отрезка при наведении на него курсора мыши.</p>
+<p>Создание прямоугольников методом create_rectangle():</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_rectangle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">create_rectangle</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'yellow'</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'green'</span><span class="p">,</span>
+                    <span class="n">width</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">activedash</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="err">…</span>
+</pre></div>
+<p>Первые координаты – верхний левый угол, вторые – правый нижний. В приведенном примере, когда на второй прямоугольник попадает курсор мыши, его рамка становится пунктирной, что определяется свойством activedash.</p>
+<p>Методом create_polygon() рисуется произвольный многоугольник путем задания координат каждой его точки:</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_polygon</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">create_polygon</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span>
+                <span class="n">fill</span><span class="o">=</span><span class="s1">'orange'</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="err">…</span>
+</pre></div>
+<p>Для удобства координаты точек можно заключать в скобки:</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_polygon</span><span class="p">((</span><span class="mi">40</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="mi">160</span><span class="p">,</span> <span class="mi">110</span><span class="p">),</span> <span class="p">(</span><span class="mi">190</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">180</span><span class="p">),</span>
+                <span class="n">fill</span><span class="o">=</span><span class="s1">'orange'</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'black'</span><span class="p">)</span>
+<span class="err">…</span>
+</pre></div>
+<p>Метод create_oval() создает эллипсы. При этом задаются координаты гипотетического прямоугольника, описывающего эллипс. Если нужно получить круг, то соответственно описываемый прямоугольник должен быть квадратом.</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'grey70'</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="err">…</span>
+</pre></div>
+<p>Более сложные для понимания фигуры получаются при использовании метода create_arc(). В зависимости от значения опции style можно получить сектор (по умолчанию), сегмент (CHORD) или дугу (ARC). Также как в случае create_oval() координаты задают прямоугольник, в который вписана окружность (или эллипс), из которой "вырезают" сектор, сегмент или дугу. Опции start присваивается градус начала фигуры, extent определяет угол поворота.</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'lightgrey'</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_arc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="mi">45</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'red'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_arc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'orange'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_arc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">240</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">CHORD</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s1">'green'</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_arc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">160</span><span class="p">,</span> <span class="n">extent</span><span class="o">=-</span><span class="mi">70</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="n">ARC</span><span class="p">,</span> <span class="n">outline</span><span class="o">=</span><span class="s1">'darkblue'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="err">…</span>
+</pre></div>
+<p>На холсте можно разместить текст. Делается это с помощью метода create_text():</p>
+<div class="highlight"><pre><span></span><span class="err">…</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_text</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">"Hello World,</span><span class="se">\n</span><span class="s2">Python</span><span class="se">\n</span><span class="s2">and Tk"</span><span class="p">,</span>
+                <span class="n">justify</span><span class="o">=</span><span class="n">CENTER</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">"Verdana 14"</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">create_text</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">"About this"</span><span class="p">,</span>
+                <span class="n">anchor</span><span class="o">=</span><span class="n">SE</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">"grey"</span><span class="p">)</span>
+<span class="err">…</span>
+</pre></div>
+<p>По умолчанию в заданной координате располагается центр текстовой надписи. Чтобы изменить это и, например, разместить по указанной координате левую границу текста, используется якорь со значением W (от англ. west – запад). Другие значения: N, NE, E, SE, S, SW, W, NW. Если букв, задающих сторону привязки, две, то вторая определяет вертикальную привязку (вверх или вниз «уйдет» текст от заданной координаты). Свойство justify определяет лишь выравнивание текста относительно себя самого.</p>
+</div>
+<div class="section" id="id3">
+<h2><a class="toc-backref" href="http://cs.mipt.ru/python/drafts/lab6.html#id7">Заготовка игры "Поймай шарик"</a></h2>
+<p>Для создания игр разумнее использовать специальные библиотеки (движки), хотя бы Pygame, которые уже содержат такие вещи, как двойная буферизация, работа с спрайтами и т.д. Но первые «игры» мы будем создать с помощью tkinter, потому что цель — научится программировать (в Python), а не создать готовый продукт (игру). Для этой цели простой и понятный tkinter подходит больше, чем сложные, хотя и богатые по возможностям игровые движки.</p>
+<p>Суть игры проста: в случайном месте появляется на короткое время шарик и мы должны успеть щелкнуть по нему мышкой.</p>
+<p>Вначале создадим появляющиеся шарики:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span> <span class="k">as</span> <span class="n">rnd</span><span class="p">,</span> <span class="n">choice</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">'800x600'</span><span class="p">)</span>
+
+<span class="n">canv</span> <span class="o">=</span> <span class="n">Canvas</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">bg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">canv</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'red'</span><span class="p">,</span><span class="s1">'orange'</span><span class="p">,</span><span class="s1">'yellow'</span><span class="p">,</span><span class="s1">'green'</span><span class="p">,</span><span class="s1">'blue'</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">new_ball</span><span class="p">():</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">new_ball</span><span class="p">)</span>
+
+<span class="n">new_ball</span><span class="p">()</span>
+<span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+<p>Теперь добавим обработку щелчка мыши. Для начала выведем что-нибудь в консоль:</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randrange</span> <span class="k">as</span> <span class="n">rnd</span><span class="p">,</span> <span class="n">choice</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">Tk</span><span class="p">()</span>
+<span class="n">root</span><span class="o">.</span><span class="n">geometry</span><span class="p">(</span><span class="s1">'800x600'</span><span class="p">)</span>
+
+<span class="n">canv</span> <span class="o">=</span> <span class="n">Canvas</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="n">bg</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">canv</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">fill</span><span class="o">=</span><span class="n">BOTH</span><span class="p">,</span><span class="n">expand</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'red'</span><span class="p">,</span><span class="s1">'orange'</span><span class="p">,</span><span class="s1">'yellow'</span><span class="p">,</span><span class="s1">'green'</span><span class="p">,</span><span class="s1">'blue'</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">new_ball</span><span class="p">():</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">new_ball</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s1">'click'</span><span class="p">)</span>
+
+<span class="n">new_ball</span><span class="p">()</span>
+<span class="n">canv</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">'&lt;Button-1&gt;'</span><span class="p">,</span> <span class="n">click</span><span class="p">)</span>
+<span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+<p>При каждом щелчке в консоли будет появляться надпись «click».</p>
+<p>Чтобы определить, попали ли мы в круг, нужно знать его координаты, радиус круга и координаты мыши в момент щелчка. Координаты мыши легко получить через event.x, event.y. Попробуем получить координаты круга:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+<p>Такой способ не прошел. Почему? В чем суть появившегося сообщения об ошибке, что оно означает?</p>
+<p>Исправим ситуацию:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">new_ball</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">r</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">ALL</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">700</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">rnd</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">canv</span><span class="o">.</span><span class="n">create_oval</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">-</span><span class="n">r</span><span class="p">,</span><span class="n">x</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">y</span><span class="o">+</span><span class="n">r</span><span class="p">,</span><span class="n">fill</span> <span class="o">=</span> <span class="n">choice</span><span class="p">(</span><span class="n">colors</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">after</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="n">new_ball</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">event</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+</pre></div>
+<p>Использование global – это не самое лучшее решение. Для данной задачи больше подходит использование ООП (объектно-ориентированного подхода), но об этом позже. А пока – будем использовать global.</p>
+<p>global означает, что переменные будут считаться глобальными (а не локальными), т.е. их значение сохранится и после завершения работы функции, а не будет уничтожено, как это произойдет со всеми локальными переменными.</p>
+<p>Осталось проверить, не лежит ли точка <code>(event.x, event.y)</code> дальше, чем r от точки <code>(x,y)</code>. Для этого, с помощью теоремы Пифагора мы найдем расстояние между двумя точками и сравним с радиусом круга.</p>
+<div class="section" id="id4">
+<h3><a class="toc-backref" href="http://cs.mipt.ru/python/drafts/lab6.html#id8">Задания</a></h3>
+<ol class="arabic simple">
+<li>Сделать код читабельным и документированным.</li>
+<li>Реализовать подсчёт очков.</li>
+<li>Сделать шарики двигающимися со случайным отражением от стен.</li>
+<li>Реализовать одновременное присутствие нескольких шариков на экране.</li>
+<li><ul class="first">
+<li>Добавить второй тип мишени со своей формой и своим специфическим харктером движения.</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>Выдавать за эти мишени другое количество очков.</li>
+</ul>
+</li>
+<li><ul class="first">
+<li>Сделать таблицу лучших игроков, авматически сохраняющуюся в файл.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+
+    </article></div><!-- /.entry-content -->
+
+  
+
+                <section id="extras" class="body">
+                </section><!-- /#extras -->
+            </div>
+        
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Сайт построен с использованием <a href="http://getpelican.com/">Pelican</a>. За основу оформления взята тема от <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>. Исходные тексты программ, приведённые на этом сайте, распространяются под лицензией <a href="https://www.gnu.org/licenses/quick-guide-gplv3.ru.html">GPLv3</a>, все остальные материалы сайта распространяются под лицензией <a href="https://creativecommons.org/licenses/by/4.0/">CC-BY</a>.
+                </address><!-- /#about -->
+        </footer><!-- /#contentinfo -->
+
+
+</body></html>
