@@ -12,7 +12,7 @@ frequency = [  math.pi / 3 / 1, math.pi / 3 / 2,
 	math.pi / 3 / 3, math.pi / 3 / 4, 
 	math.pi / 3 / 5, math.pi / 3 / 6, 
 	math.pi / 3 / 7, math.pi / 3 / 8, 
-	math.pi / 3 / 9
+	math.pi / 3 / 9 #Убери это, либо используй 
 ]
 
 tk.root.geometry(str(screen_width)+'x'+str(screen_height))
@@ -32,36 +32,58 @@ text = tk.canv.create_text(text_position_x,
 
 ##Описание класса шарик
 class ball:
- 
-    x = 0 
-    y = 0
-    r = 0
-    Vx = 0 
-    Vy = 0 
-    obj = 0 #Объект шарик на холсте
+    count = 0
+    def __init__(self, x, y, r, Vx, Vy):
+        ball.count += 1
+        self.count = ball.count
+        self.x = x 
+        self.y = y
+        self.r = r
+        self.Vx = Vx
+        self.Vy = Vy
+        self.obj = tk.canv.create_oval(self.x - self.r, self.y - self.r,
+                self.x + self.r, self.y + self.r,
+				    fill = choice(colors), width = 0
+    )    
+#Объект шарик на холсте
     # Метод для движения шарика
-    def move_ball(self):
+    def move_ball(self, balls):
         global screen_width, screen_height
         tk.canv.move(self.obj, self.Vx, self.Vy)
         self.x += self.Vx
         self.y += self.Vy
         if (self.x + self.Vx + self.r >= screen_width) or (self.x + self.Vx - self.r <= 0):
-            self.Vx = -0.9 * self.Vx 
+            self.Vx = -1 * self.Vx 
         elif (self.y + self.Vy + self.r >= screen_height) or (self.y + self.Vy - self.r <= 0): 
-            self.Vy = -0.9 * self.Vy
+            self.Vy = -1 * self.Vy
+        for b in balls: 
+            if (self.x - b.x) * (self.x - b.x) + (self.y - b.y) * (self.y - b.y) - (self.r + b.r) * (self.r + b.r) <=0 and b.count != self.count:
+                self.reflect(b)
+
 #Мeтод удаления и замены шарика 
     def delete_ball(self):
         tk.canv.delete(self.obj)
         self.x = rnd(100, 700)
-        self.y = rnd(100, 600)
+        self.y = rnd(100, 500)
         self.r = rnd(30, 50)
-        self.Vx = rnd(-20, 20)
-        self.Vy = rnd(-20, 20)
+        self.Vx = rnd(-40, 40)
+        self.Vy = rnd(-40, 40)
         self.obj = tk.canv.create_oval(self.x - self.r, self.y - self.r,
     	   			    self.x + self.r, self.y + self.r,
 				    fill = choice(colors), width = 0
-        )     
+        )
 
+#Отражение шариков друг от друга
+    def reflect(self, ball): #TODO! Шарики не должный слипаться! Модель соударений в теории упругости? Ещё варианты? 
+        flx = ball.Vx
+        fly = ball.Vy
+        ball.Vx = self.Vx
+        ball.Vy = self.Vy
+        self.Vx = flx
+        self.Vy = fly
+
+
+"""
 #Описание класса квадрат 
 class square:
  
@@ -101,28 +123,6 @@ class square:
         )      
 
 
-
-#Обработка события нажатия левой кнопки мыши
-def click(event):
-    global a, b, k, text
-#Зачисление очков за шарик 
-    for i in range(len(a)):
-        if a[i].x != event.x and a[i].y != event.y:
-            r_to_the_center = math.sqrt((event.x - a[i].x) * (event.x - a[i].x) + (event.y - a[i].y) * (event.y - a[i].y))
-        else:
-            r_to_the_center = 0
-        if r_to_the_center <= a[i].r:
-            k += 1
-            a[i].delete_ball()
-            text_position_x = 400
-            text_position_y = 10 
-            tk.canv.delete(text)
-            text = tk.canv.create_text(text_position_x,	
-     	    		text_position_y, justify = tk.CENTER,  
- 	    		text = "Количество очков : " + str(k),
- 	                font = "Verdana 14"	
-            )
-
 #Зачисление очков за квадрат
     for i in range(len(b)):
         if b[i].x != event.x and b[i].y != event.y:
@@ -140,7 +140,28 @@ def click(event):
  	    		text = "Количество очков : " + str(k),
  	                font = "Verdana 14"	
             )
+"""
 
+#Обработка события нажатия левой кнопки мыши
+def click(event):
+    global list_of_balls, b, k, text
+#Зачисление очков за шарик 
+    for i in range(len(list_of_balls)):
+        if list_of_balls[i].x != event.x and list_of_balls[i].y != event.y:
+            r_to_the_center = math.sqrt((event.x - list_of_balls[i].x) * (event.x - list_of_balls[i].x) + (event.y - list_of_balls[i].y) * (event.y - list_of_balls[i].y))
+        else:
+            r_to_the_center = 0
+        if r_to_the_center <= list_of_balls[i].r:
+            k += 1
+            list_of_balls[i].delete_ball()
+            text_position_x = 400
+            text_position_y = 10 
+            tk.canv.delete(text)
+            text = tk.canv.create_text(text_position_x,	
+     	    		text_position_y, justify = tk.CENTER,  
+ 	    		text = "Количество очков : " + str(k),
+ 	                font = "Verdana 14"	
+            )
 
 
 
@@ -148,20 +169,15 @@ def click(event):
 
 
 #Создание списка шариков
-n = int(input())#Количество шариков на экране
-a = [] 
+n = 11#int(input())#Количество шариков на экране
+list_of_balls = [] 
 for i in range(n):
-    a.append(ball())    
-    a[i].x = rnd(100, 700)
-    a[i].y = rnd(100, 600)
-    a[i].r = rnd(30, 50)
-    a[i].Vx = rnd(-20, 20)
-    a[i].Vy = rnd(-20, 20)
-    a[i].obj = tk.canv.create_oval(a[i].x - a[i].r, a[i].y - a[i].r,
-    				    a[i].x + a[i].r, a[i].y + a[i].r,
-				    fill = choice(colors), width = 0
-    )    
-    
+    list_of_balls.append(ball(rnd(100, 700), rnd(100,500),  #x, y, r, Vx, Vy 
+                  rnd(30,50), rnd(-30, 30), 
+                  rnd(-30,30)
+                 )    
+    )
+"""
 #Создание списка квадратов 
 n1 = int(input())#Количество квадратов на экране
 b = [] 
@@ -178,7 +194,7 @@ for i in range(n1):
     	   			    b[i].x + b[i].l / 2, b[i].y + b[i].l / 2,
 				    fill = choice(colors), width = 0
     )      
-
+"""
 
 
 	
@@ -186,15 +202,11 @@ for i in range(n1):
 
 
 def main():
-    global a,b
+    global list_of_balls, b
     i = 0
 #Движение всех объектов
-    while i < len(a):
-        a[i].move_ball()      
-        i += 1
-    i = 0
-    while i < len(b):
-        b[i].move_square()
+    while i < len(list_of_balls):
+        list_of_balls[i].move_ball(list_of_balls)      
         i += 1
     tk.root.after(70, main)
 
