@@ -46,10 +46,9 @@ beach_color = '#ede900'
 g.brushColor(beach_color)
 g.penColor(beach_color)
 
-sea_line_points = []
-sea_line_points.append((beach_bottom_right_point_x, beach_upper_left_point_y + amplitude_sin_beach))
-sea_line_points.append((beach_bottom_right_point_x, beach_bottom_right_point_y))
-sea_line_points.append((beach_upper_left_point_x, beach_bottom_right_point_y))
+sea_line_points = [(beach_bottom_right_point_x, beach_upper_left_point_y + amplitude_sin_beach),
+                   (beach_bottom_right_point_x, beach_bottom_right_point_y),
+                   (beach_upper_left_point_x, beach_bottom_right_point_y)]
 
 number_of_points = 500
 x = beach_upper_left_point_x
@@ -96,10 +95,10 @@ def draw_an_ellipse(ellipse_center_x, ellipse_center_y,
     details = 300
     angle_step = 2 * math.pi / details
     points = []
-    for i in range(details):
-        x = ellipse_center_x + amplitude_x * math.cos(angle)
-        y = ellipse_center_y + amplitude_y * math.sin(angle)
-        points.append((x, y))
+    for _ in range(details):
+        x_coord = ellipse_center_x + amplitude_x * math.cos(angle)
+        y_coord = ellipse_center_y + amplitude_y * math.sin(angle)
+        points.append((x_coord, y_coord))
         angle += angle_step
 
     points.append((ellipse_center_x + amplitude_x, ellipse_center_y))
@@ -119,7 +118,7 @@ def draw_clouds(center_of_the_fisrt_cloud_x, center_of_the_first_cloud_y,
     center_cloud_1_x = center_of_the_fisrt_cloud_x
     center_cloud_1_y = center_of_the_first_cloud_y
     number_of_clouds_1 = 2
-    for i in range(number_of_clouds_1):
+    for _ in range(number_of_clouds_1):
         obj = draw_an_ellipse(center_cloud_1_x, center_cloud_1_y, cloud_radius_x, cloud_radius_y)
         center_cloud_1_x += step_of_clouds
         cloud_object.append(obj)
@@ -127,7 +126,7 @@ def draw_clouds(center_of_the_fisrt_cloud_x, center_of_the_first_cloud_y,
     center_cloud_2_x = center_of_the_fisrt_cloud_x - cloud_radius_x
     center_cloud_2_y = center_of_the_first_cloud_y + cloud_radius_y
     number_of_clouds_2 = 3
-    for i in range(number_of_clouds_2):
+    for _ in range(number_of_clouds_2):
         obj = draw_an_ellipse(center_cloud_2_x, center_cloud_2_y, cloud_radius_x, cloud_radius_y)
         center_cloud_2_x += step_of_clouds
         cloud_object.append(obj)
@@ -170,14 +169,12 @@ def draw_an_umbrella(umbrella_base_x, umbrella_base_y,
     g.penColor(umbrella_color)
 
     fi = math.pi / 180 * 20
-    dx = 0
-    dy = 0
-    for i in range(umbrella_stick_length // 2):
-        dx = math.sin(fi) * 2
+    for _ in range(umbrella_stick_length // 2):
+        dx_umbrella = math.sin(fi) * 2
         dy = math.cos(fi) * 2
         g.line(umbrella_base_x, umbrella_base_y,
-               umbrella_base_x + dx, umbrella_base_y - dy)  # umbrella_triangle_left_angle_y)
-        umbrella_base_x += dx
+               umbrella_base_x + dx_umbrella, umbrella_base_y - dy)  # umbrella_triangle_left_angle_y)
+        umbrella_base_x += dx_umbrella
         umbrella_base_y -= dy
         fi += math.pi / 180 * 0.5
 
@@ -203,7 +200,7 @@ def draw_an_umbrella(umbrella_base_x, umbrella_base_y,
     needle_base_point_y = umbrella_triangle_left_angle_y
     step_needle_x = umbrella_triangle_base / 7 * math.cos(fi)
     step_needle_y = umbrella_triangle_base / 7 * math.sin(fi)
-    for i in range(number_of_needle):
+    for _ in range(number_of_needle):
         needle_base_point_x += step_needle_x
         needle_base_point_y += step_needle_y
 
@@ -236,15 +233,15 @@ draw_an_umbrella(umbrella_2_base_x, umbrella_2_base_y,
 
 def points_of_stern(center_of_stern_x, center_of_stern_y, radius_of_stern):
     angle = 0
-    number_of_points = 100
-    step_of_angle = math.pi / 2 / number_of_points
+    number_of_points_of_stern = 100
+    stern_step_of_angle = math.pi / 2 / number_of_points_of_stern
     points = []
 
-    for i in range(number_of_points):
-        angle += step_of_angle
-        x = center_of_stern_x - radius_of_stern * math.cos(angle)
-        y = center_of_stern_y + radius_of_stern * math.sin(angle)
-        points.append((x, y))
+    for _ in range(number_of_points_of_stern):
+        angle += stern_step_of_angle
+        x_of_stern = center_of_stern_x - radius_of_stern * math.cos(angle)
+        y_of_stern = center_of_stern_y + radius_of_stern * math.sin(angle)
+        points.append((x_of_stern, y_of_stern))
 
     return points
 
@@ -334,7 +331,7 @@ stern_of_ship = objects_of_ship_2[0]
 ship_length = 237
 
 
-def keyPressed(event):
+def keyPressed():
     pause = 0.1
     time.sleep(pause)
     g.close()

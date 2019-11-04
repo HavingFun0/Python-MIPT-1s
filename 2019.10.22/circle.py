@@ -1,3 +1,4 @@
+# coding=utf-8
 class circle():
     def __init__(self, canv, x=40, y=450, r=10, vx=0, vy=0, Ax=0, Ay=0):
         """ Конструктор класса круг

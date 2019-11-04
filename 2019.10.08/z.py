@@ -1,3 +1,4 @@
+# coding=utf-8
 import math
 import time
 import tkinter as tk
@@ -30,7 +31,7 @@ text = tk.canv.create_text(text_position_x,
                            )
 
 
-##Описание класса шарик
+# Описание класса шарик
 class ball:
     count = 0
 
@@ -62,8 +63,8 @@ class ball:
         for b in balls:
             if (self.x - b.x) * (self.x - b.x) + (self.y - b.y) * (self.y - b.y) - (self.r + b.r) * (
                     self.r + b.r) < 0 and b.count != self.count:
-                for i in self.collision_with:
-                    if i != b.count:
+                for q in self.collision_with:
+                    if q != b.count:
                         self.reflect(b)
                 if len(self.collision_with) == 0:
                     self.reflect(b)
@@ -82,13 +83,13 @@ class ball:
                                        )
 
     # Отражение шариков друг от друга
-    def reflect(self, ball):
-        ball2_vx = ball.Vx
-        ball2_vy = ball.Vy
+    def reflect(self, ref_ball):
+        ball2_vx = ref_ball.Vx
+        ball2_vy = ref_ball.Vy
         ball1_vx = self.Vx
         ball1_vy = self.Vy
-        if ball.x - self.x != 0:
-            a = math.atan(math.atan((ball.y - self.y) / (ball.x - self.x)))  # Угол разлета
+        if ref_ball.x - self.x != 0:
+            a = math.atan(math.atan((ref_ball.y - self.y) / (ref_ball.x - self.x)))  # Угол разлета
         else:
             a = math.pi / 2
         sin_a = math.sin(a)
@@ -96,9 +97,9 @@ class ball:
         self.Vx = ball2_vx * cos_a * cos_a + sin_a * cos_a * ball2_vy - sin_a * cos_a * ball1_vy + sin_a * sin_a * ball1_vx
         self.Vy = ball2_vx * cos_a * sin_a + sin_a * sin_a * ball2_vy + cos_a * cos_a * ball1_vy - sin_a * cos_a * ball1_vx
 
-        ball.Vx = ball1_vx * cos_a * cos_a + sin_a * cos_a * ball1_vy - sin_a * cos_a * ball2_vy + sin_a * sin_a * ball2_vx
-        ball.Vy = ball1_vx * cos_a * sin_a + sin_a * sin_a * ball1_vy + cos_a * cos_a * ball2_vy - sin_a * cos_a * ball2_vx
-        ball.collision_with.append(self.count)
+        ref_ball.Vx = ball1_vx * cos_a * cos_a + sin_a * cos_a * ball1_vy - sin_a * cos_a * ball2_vy + sin_a * sin_a * ball2_vx
+        ref_ball.Vy = ball1_vx * cos_a * sin_a + sin_a * sin_a * ball1_vy + cos_a * cos_a * ball2_vy - sin_a * cos_a * ball2_vx
+        ref_ball.collision_with.append(self.count)
 
 
 """
@@ -136,52 +137,38 @@ class square:
         self.wx = choice(frequency)
         self.wy = choice(frequency)
         self.obj = tk.canv.create_rectangle(self.x - self.l / 2, self.y - self.l / 2,
-    	   			    self.x + self.l / 2, self.y + self.l / 2,
-				    fill = choice(colors), width = 0
-        )      
+    	   			                        self.x + self.l / 2, self.y + self.l / 2,
+				                            fill = choice(colors), width = 0)      
 
 
-#Зачисление очков за квадрат
-    for i in range(len(b)):
-        if b[i].x != event.x and b[i].y != event.y:
-            r_to_the_center = math.sqrt((event.x - b[i].x) * (event.x - b[i].x) + (event.y - b[i].y) * (event.y - b[i].y))
-        else:
-            r_to_the_center = 0
-        if r_to_the_center <= b[i].l / 2 * math.sqrt(2):
-            k += 2
-            b[i].delete_square()
-            text_position_x = 400
-            text_position_y = 10 
-            tk.canv.delete(text)
-            text = tk.canv.create_text(text_position_x,	
-     	    		text_position_y, justify = tk.CENTER,  
- 	    		text = "Количество очков : " + str(k),
- 	                font = "Verdana 14"	
-            )
-"""
+#Зачисление очков за квадрат for i in range(len(b)): if b[i].x != event.x and b[i].y != event.y: r_to_the_center = 
+math.sqrt((event.x - b[i].x) * (event.x - b[i].x) + (event.y - b[i].y) * (event.y - b[i].y)) else: r_to_the_center = 
+0 if r_to_the_center <= b[i].l / 2 * math.sqrt(2): k += 2 b[i].delete_square() text_position_x = 400 text_position_y 
+= 10 tk.canv.delete(text) text = tk.canv.create_text(text_position_x, text_position_y, justify = tk.CENTER, 
+text = "Количество очков : " + str(k), font = "Verdana 14" ) """
 
 
 # Обработка события нажатия левой кнопки мыши
-def click(event, list_of_balls, k, text):
+def click(event, all_balls, points, score_text):
     # Зачисление очков за шарик
-    for i in range(len(list_of_balls)):
-        if list_of_balls[i].x != event.x and list_of_balls[i].y != event.y:
+    for i in range(len(all_balls)):
+        if all_balls[i].x != event.x and all_balls[i].y != event.y:
             r_to_the_center = math.sqrt(
-                (event.x - list_of_balls[i].x) * (event.x - list_of_balls[i].x) + (event.y - list_of_balls[i].y) * (
-                        event.y - list_of_balls[i].y))
+                (event.x - all_balls[i].x) * (event.x - all_balls[i].x) + (event.y - all_balls[i].y) * (
+                        event.y - all_balls[i].y))
         else:
             r_to_the_center = 0
-        if r_to_the_center <= list_of_balls[i].r:
-            k += 1
-            list_of_balls[i].delete_ball()
-            text_position_x = 400
-            text_position_y = 10
-            tk.canv.delete(text)
-            text = tk.canv.create_text(text_position_x,
-                                       text_position_y, justify=tk.CENTER,
-                                       text="Количество очков : " + str(k),
-                                       font="Verdana 14"
-                                       )
+        if r_to_the_center <= all_balls[i].r:
+            points += 1
+            all_balls[i].delete_ball()
+            text_x = 400
+            text_y = 10
+            tk.canv.delete(score_text)
+            score_text = tk.canv.create_text(text_x,
+                                             text_y, justify=tk.CENTER,
+                                             text="Количество очков : " + str(points),
+                                             font="Verdana 14"
+                                             )
 
 
 # Создание списка шариков
@@ -207,22 +194,21 @@ for i in range(n1):
     b[i].y = rnd(200, 300)
     b[i].l = rnd(30, 50)
     b[i].obj = tk.canv.create_rectangle(b[i].x - b[i].l / 2, b[i].y - b[i].l / 2,
-    	   			    b[i].x + b[i].l / 2, b[i].y + b[i].l / 2,
-				    fill = choice(colors), width = 0
-    )      
+    	   			                    b[i].x + b[i].l / 2, b[i].y + b[i].l / 2,
+				                        fill = choice(colors), width = 0)      
 """
 
 
 def main():
-    i = 0
+    j = 0
     # Движение всех объектов
-    while i < len(list_of_balls):
-        list_of_balls[i].move_ball(list_of_balls)
-        i += 1
-    i = 0
-    while i < len(list_of_balls):
-        list_of_balls[i].collision_with.clear()
-        i += 1
+    while j < len(list_of_balls):
+        list_of_balls[j].move_ball(list_of_balls)
+        j += 1
+    j = 0
+    while j < len(list_of_balls):
+        list_of_balls[j].collision_with.clear()
+        j += 1
     tk.root.after(70, main)
 
 

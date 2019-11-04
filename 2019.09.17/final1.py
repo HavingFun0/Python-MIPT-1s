@@ -1,4 +1,4 @@
-import math
+# coding=utf-8
 import tkinter as tk
 
 root = tk.Tk()
@@ -14,7 +14,6 @@ canvas.move('тэг объекта', dx, dy), где dx - перемещение
 dy - по y,тэг объекта - класс к которому он причастен
 
 canvas.after(t, имя функции), t -- время в миллисекундах
-
 
 """
 
@@ -88,7 +87,7 @@ canvas.create_polygon(2.0, 433.0, 47.0, 411.0,
                       234.0, 141.0, 223.0, 141.0, 80.0,
                       191.0, 48.0, 201.0, 1.0, 224.0,
                       2.0, 433.0, 13.0, 417.0, fill="#e3a983",
-                      width=1.0, outline="#cd885f", tags=('leftarm')
+                      width=1.0, outline="#cd885f", tags='leftarm'
                       )
 canvas.create_polygon(317.0, 262.0, 308.0, 276.0,
                       311.0, 297.0, 316.0, 307.0, 331.0,
@@ -102,7 +101,7 @@ canvas.create_polygon(317.0, 262.0, 308.0, 276.0,
                       373.0, 259.0, 347.0, 249.0, 328.0,
                       254.0, 315.0, 265.0, 315.0, 265.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('leftarm')
+                      outline="#cd885f", tags='leftarm'
                       )
 canvas.create_polygon(455.0, 199.0, 438.0, 198.0,
                       423.0, 210.0, 420.0, 223.0, 419.0,
@@ -117,7 +116,7 @@ canvas.create_polygon(455.0, 199.0, 438.0, 198.0,
                       230.0, 497.0, 215.0, 463.0, 203.0,
                       454.0, 199.0, 454.0, 199.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('leftarm')
+                      outline="#cd885f", tags='leftarm'
                       )
 canvas.create_polygon(308.0, 154.0, 267.0, 164.0,
                       244.0, 182.0, 232.0, 200.0, 233.0,
@@ -134,7 +133,7 @@ canvas.create_polygon(308.0, 154.0, 267.0, 164.0,
                       169.0, 359.0, 166.0, 344.0, 164.0,
                       307.0, 153.0, 307.0, 153.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('leftarm')
+                      outline="#cd885f", tags='leftarm'
                       )
 canvas.create_polygon(412.0, 253.0, 443.0, 278.0,
                       459.0, 298.0, 473.0, 315.0, 483.0,
@@ -147,7 +146,7 @@ canvas.create_polygon(412.0, 253.0, 443.0, 278.0,
                       253.0, 430.0, 256.0, 414.0, 250.0,
                       416.0, 256.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('leftarm')
+                      tags='leftarm'
                       )
 
 canvas.create_polygon(495.0, 263.0, 497.0, 297.0,
@@ -157,7 +156,7 @@ canvas.create_polygon(495.0, 263.0, 497.0, 297.0,
                       342.0, 536.0, 291.0, 513.0, 265.0,
                       497.0, 264.0, 497.0, 264.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('leftarm')
+                      outline="#cd885f", tags='leftarm'
                       )
 
 canvas.create_polygon(392.0, 274.0, 410.0, 277.0,
@@ -167,14 +166,14 @@ canvas.create_polygon(392.0, 274.0, 410.0, 277.0,
                       262.0, 390.0, 275.0, 409.0, 278.0,
                       410.0, 278.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('leftarm')
+                      tags='leftarm'
                       )
 
 canvas.create_polygon(413.0, 359.0, 406.0, 380.0,
                       419.0, 394.0, 428.0, 390.0, 436.0,
                       375.0, 413.0, 360.0, 415.0, 361.0,  # мизинец левой руки, нижняя часть
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('leftarm')
+                      outline="#cd885f", tags='leftarm'
                       )
 
 canvas.create_polygon(1198.0, 173.0, 1134.0,
@@ -190,7 +189,7 @@ canvas.create_polygon(1198.0, 173.0, 1134.0,
                       346.0, 1198.0, 174.0, 1189.0,
                       186.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('rightarm')
+                      tags='rightarm'
                       )
 canvas.create_polygon(784.0, 263.0, 745.0, 261.0,
                       714.0, 261.0, 670.0, 274.0, 619.0,
@@ -202,7 +201,7 @@ canvas.create_polygon(784.0, 263.0, 745.0, 261.0,
                       296.0, 772.0, 283.0, 782.0, 261.0,
                       782.0, 261.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('rightarm')
+                      tags='rightarm'
                       )
 canvas.create_polygon(872.0, 276.0, 849.0, 292.0,
                       839.0, 309.0, 820.0, 322.0, 793.0,
@@ -229,7 +228,7 @@ canvas.create_polygon(823.0, 255.0, 798.0, 256.0,
                       782.0, 315.0, 814.0, 312.0, 828.0,
                       304.0, 823.0, 258.0, 822.0, 255.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('rightarm')
+                      outline="#cd885f", tags='rightarm'
                       )
 canvas.create_polygon(970.0, 210.0, 930.0, 210.0,
                       909.0, 218.0, 890.0, 222.0, 823.0,
@@ -241,7 +240,7 @@ canvas.create_polygon(970.0, 210.0, 930.0, 210.0,
                       970.0, 249.0, 982.0, 235.0, 977.0,
                       218.0, 970.0, 211.0, 956.0, 225.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('rightarm')
+                      outline="#cd885f", tags='rightarm'
                       )
 canvas.create_polygon(864.0, 392.0, 859.0, 407.0,
                       851.0, 423.0, 851.0, 441.0, 852.0,
@@ -251,7 +250,7 @@ canvas.create_polygon(864.0, 392.0, 859.0, 407.0,
                       896.0, 406.0, 899.0, 402.0, 888.0,
                       395.0, 867.0, 389.0, 864.0, 389.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('rightarm')
+                      outline="#cd885f", tags='rightarm'
                       )
 canvas.create_polygon(765.0, 397.0, 758.0, 432.0,
                       762.0, 456.0, 769.0, 484.0, 774.0,
@@ -261,7 +260,7 @@ canvas.create_polygon(765.0, 397.0, 758.0, 432.0,
                       798.0, 393.0, 779.0, 397.0, 767.0,
                       398.0, 767.0, 398.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('rightarm')
+                      tags='rightarm'
                       )
 canvas.create_polygon(844.0, 366.0, 833.0, 369.0,
                       825.0, 376.0, 812.0, 388.0, 802.0,
@@ -274,7 +273,7 @@ canvas.create_polygon(844.0, 366.0, 833.0, 369.0,
                       396.0, 859.0, 387.0, 853.0, 373.0,
                       842.0, 366.0, 840.0, 375.0,
                       fill="#e3a983", width=1.0,
-                      outline="#cd885f", tags=('rightarm')
+                      outline="#cd885f", tags='rightarm'
                       )
 canvas.create_polygon(980.0, 284.0, 979.0, 320.0,
                       953.0, 345.0, 933.0, 351.0, 898.0,
@@ -287,7 +286,7 @@ canvas.create_polygon(980.0, 284.0, 979.0, 320.0,
                       325.0, 994.0, 315.0, 980.0, 284.0,
                       980.0, 284.0, fill="#e3a983",
                       width=1.0, outline="#cd885f",
-                      tags=('rightarm')
+                      tags='rightarm'
                       )
 
 canvas.grid(sticky="nwes")
