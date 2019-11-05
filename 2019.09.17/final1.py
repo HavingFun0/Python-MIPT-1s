@@ -1,3 +1,4 @@
+# coding=utf-8
 import tkinter as tk
 
 root = tk.Tk()
@@ -6,6 +7,7 @@ canvas = tk.Canvas(root)
 delta = 0
 up = True
 right = True
+
 
 def right_hand_move():
     """Движение правой руки """
@@ -40,6 +42,7 @@ def left_hand_move():
         right = True
 
     canvas.after(15, left_hand_move)
+
 
 canvas["width"] = 1200
 canvas["height"] = 600
