@@ -9,8 +9,7 @@ up = True
 right = True
 
 def right_hand_move():
-    """Движение правой руки
-    """
+    """Движение правой руки """
     global delta, up
     if delta < 15 and up:
         delta += 1
@@ -43,8 +42,6 @@ def left_hand_move():
 
     canvas.after(15, left_hand_move)
 
-
-#####################################################################
 canvas["width"] = 1200
 canvas["height"] = 600
 canvas.create_polygon(2.0, 438.0, 59.0,
@@ -280,10 +277,8 @@ canvas.create_polygon(980.0, 284.0, 979.0, 320.0,
                       )
 
 canvas.grid(sticky="nwes")
-
 canvas.move('leftarm', -15, 0)
 canvas.move('rightarm', 5, 0)
 right_hand_move()  # Вызов функции движение правой руки
 left_hand_move()  # Вызов функции движение левой руки
-
 root.mainloop()
