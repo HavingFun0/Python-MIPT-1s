@@ -1,28 +1,26 @@
-import circle
-from random import randrange as rnd, choice
-class target(circle.circle):  # Класс мишень
-    def __init__(self, canv):
-        self.canv = canv
-        self.points = 0
-        self.live = 1
-        self.id = canv.create_oval(0, 0, 0, 0)
-        self.id_points = canv.create_text(30, 30, text=self.points, font='28')
+# coding=utf-8
+from random import randrange as rnd
 
-    def new_target(self, canv):
+import circle
+
+
+class target(circle.circle):  # Класс мишень
+    points = 0
+    id_points = 0
+
+    def __init__(self, canv):
         """ Инициализация новой цели. """
         super().__init__(canv, rnd(600, 750), rnd(300, 550),  # (canv, x, y, r, vx, vy, Ax, Ay)
                          rnd(20, 50), rnd(5, 15), -rnd(5, 15),
                          rnd(150, 320), rnd(100, 180)
                          )
         self.live = 1
-        canv.coords(self.id, self.x - self.r, self.y - self.r, self.x + self.r, self.y + self.r)
-        canv.itemconfig(self.id, fill=self.color)
 
-    def hit(self, canv, points=1):
+    def hit(self, canv, text_scope, point=1):
         """Попадание шарика в цель."""
-        canv.coords(self.id, -10, -10, -10, -10)
-        self.points += points
-        canv.itemconfig(self.id_points, text=self.points)
+        target.points += point
+        self.y = -100
+        canv.itemconfig(text_scope, text=target.points)
 
     def move(self, canv):
         """Движение мишени"""
@@ -37,5 +35,3 @@ class target(circle.circle):  # Класс мишень
             self.vy *= -0.95
         self.y += self.vy
         canv.move(self.id, self.vx, self.vy)
-
-

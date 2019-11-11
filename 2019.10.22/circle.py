@@ -1,4 +1,7 @@
-from random import randrange as rnd, choice
+# coding=utf-8
+from random import choice
+
+
 class circle():
     def __init__(self, canv, x=40, y=450, r=10, vx=0, vy=0, Ax=0, Ay=0):
         """ Конструктор класса круг

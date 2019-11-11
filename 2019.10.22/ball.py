@@ -1,7 +1,10 @@
-import target
+# coding=utf-8
 import circle
+
+
 class ball(circle.circle):  # Класс пуля
     def __init__(self, canv):
+        """Инициализация пули"""
         super().__init__(canv)
 
     def move(self, canv):
@@ -28,7 +31,7 @@ class ball(circle.circle):  # Класс пуля
             g = 0
         canv.move(self.id, self.vx, -self.vy + g / 2)
 
-    def hittest(self, canv, obj):
+    def hittest(self, canv, text_scope, obj):
         """Функция проверяет сталкивалкивается ли данный обьект с целью, описываемой в обьекте obj.
 
         Args:
@@ -36,8 +39,9 @@ class ball(circle.circle):  # Класс пуля
         Returns:
             Возвращает True в случае столкновения мяча и цели, и удаляет цель. В противном случае возвращает False.
         """
-        if (self.x - obj.x) * (self.x - obj.x) + (self.y - obj.y) * (self.y - obj.y) - (self.r + obj.r) * (self.r + obj.r) <= 0:
-            obj.hit(canv)
+        if (self.x - obj.x) * (self.x - obj.x) + (self.y - obj.y) * (self.y - obj.y) - (self.r + obj.r) * (
+                self.r + obj.r) <= 0:
+            obj.hit(canv, text_scope)
             return True
         else:
             return False
