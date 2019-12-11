@@ -1,4 +1,4 @@
-import image
+import polygons
 import tkinter as tk
 
 root = tk.Tk()
@@ -6,62 +6,43 @@ canvas = tk.Canvas(root)
 canvas["width"] = 1200
 canvas["height"] = 600
 
-for i in image.frame:
+for i in polygons.frame:
     canvas.create_polygon(i, fill="#dac783",
                           width=1.0, outline="#dfd28e"
                           )
 
-for i in image.left_arm:
+for i in polygons.left_arm:
     canvas.create_polygon(i, fill="#e3a983",
                           width=1.0, outline="#cd885f",
                           tags='leftarm'
                           )
-for i in image.right_arm:
+for i in polygons.right_arm:
     canvas.create_polygon(i, fill="#e3a983",
                           width=1.0, outline="#cd885f",
                           tags='rightarm'
                           )
 
 
-def right_hand_move(delta, up):
+def hand_move(delta, fl, arm, dx, dy):
     """Движение правой руки """
-    if delta < 15 and up:
+    if delta < 15 and fl:
         delta += 1
-        canvas.move('rightarm', 0, 1)
-    elif delta > 0 and (not up):
+        canvas.move(arm, dx, dy)
+    elif delta > 0 and (not fl):
         delta += -1
-        canvas.move('rightarm', 0, -1)
+        canvas.move(arm, -dx, -dy)
     if delta == 15:
-        up = False
+        fl = False
     elif delta == 0:
-        up = True
+        fl = True
 
-    canvas.after(15, lambda: right_hand_move(delta, up))
-
-
-def left_hand_move(delta, right):
-    """Движение левой руки
-    """
-    if delta < 15 and right:
-        delta += 1
-        canvas.move('leftarm', 1, 0)
-    elif delta > 0 and (not right):
-        delta += -1
-        canvas.move('leftarm', -1, 0)
-    if delta == 15:
-        right = False
-    elif delta == 0:
-        right = True
-
-    canvas.after(15, lambda: left_hand_move(delta, right))
-
+    canvas.after(15, lambda: hand_move(delta, fl, arm, dx, dy))
 
 delta = 0
-up = True
-right = True
+fl = True
 canvas.grid(sticky="nwes")
 canvas.move('leftarm', -15, 0)
 canvas.move('rightarm', 5, 0)
-right_hand_move(delta, up)  # Вызов функции движение правой руки
-left_hand_move(delta, right)  # Вызов функции движение левой руки
+hand_move(delta, fl, 'rightarm', 0, 1)  # Вызов функции движение правой руки
+hand_move(delta, fl, 'leftarm', 1, 0)  # Вызов функции движение левой руки
 root.mainloop()
